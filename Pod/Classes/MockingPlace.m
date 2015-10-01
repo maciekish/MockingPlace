@@ -7,8 +7,8 @@
 //
 
 #import "MockingPlace.h"
+#import <JRSwizzle/JRSwizzle.h>
 @import CoreLocation;
-@import JRSwizzle;
 
 #import "CLLocationManager+MockingPlaces.h"
 #import "MockLocation.h"
@@ -141,6 +141,10 @@
 - (void)simulate
 {
     self.previousLocation = self.currentLocation;
+    
+    if (self.mockLocation.locations.count == 0) {
+        [[UIAlertView.alloc initWithTitle:@"Error" message:@"Couldn't parse your geojson. Check the example files at https://www.github.com/maciekish/MockingPlace" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }
     
     if (self.mockLocation.locations.count > 1) {
         self.simulationTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(simulate) userInfo:nil repeats:NO];

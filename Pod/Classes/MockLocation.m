@@ -53,10 +53,6 @@
         }
     }
     
-    if (!_locations) {
-        [[UIAlertView.alloc initWithTitle:@"Error" message:@"Couldn't parse your geojson. Check the example files at https://www.github.com/maciekish/MockingPlace" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-    }
-    
     return _locations;
 }
 
