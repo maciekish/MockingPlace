@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/CLLocationManager+MockingPlaces.h

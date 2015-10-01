@@ -1,0 +1,18 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Place in Stockholm"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.024442,
+                    59.331116
+                ]
+            }
+        }
+    ]
+}
