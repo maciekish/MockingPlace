@@ -54,8 +54,6 @@ NSString *const kMockingPlacesLocationChangedNotification = @"kMockingPlacesLoca
         if ([self.delegate respondsToSelector:@selector(locationManager:didUpdateLocations:)]) {
             [self.delegate locationManager:self didUpdateLocations:@[location]];
         }
-        
-        #warning TODO: Heading
     }
 }
 
