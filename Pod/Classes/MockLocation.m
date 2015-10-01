@@ -32,7 +32,7 @@
         id jsonObject = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:self.path] options:kNilOptions error:&error];
         
         if (error) {
-            [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:[UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:nil];
+            [[UIAlertView.alloc initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
         } else {
             if ([jsonObject[@"features"] count] > 0) {
                 NSArray *coordinates = jsonObject[@"features"][0][@"geometry"][@"coordinates"];
@@ -54,7 +54,7 @@
     }
     
     if (!_locations) {
-        [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:[UIAlertController alertControllerWithTitle:@"Error" message:@"Couldn't parse your geojson. Check the example files at https://www.github.com/maciekish/MockingPlace" preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:nil];
+        [[UIAlertView.alloc initWithTitle:@"Error" message:@"Couldn't parse your geojson. Check the example files at https://www.github.com/maciekish/MockingPlace" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
     }
     
     return _locations;

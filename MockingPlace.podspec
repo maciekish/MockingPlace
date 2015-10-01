@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MockingPlace"
-  s.version          = "0.1.1"
+  s.version          = "0.1.2"
   s.summary          = "A complete CLLocationManager simulator."
 
   s.description      = <<-DESC
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/maciekish/MockingPlace.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/maciekish'
 
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '7.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
