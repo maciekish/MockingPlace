@@ -25,6 +25,7 @@ NSString *const kMockingPlacesLocationChangedNotification = @"kMockingPlacesLoca
 
 -(void)mock_startUpdatingLocation;
 {
+    [NSNotificationCenter.defaultCenter removeObserver:self];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(locationUpdated:) name:kMockingPlacesLocationChangedNotification object:nil];
 
     if ([self.delegate respondsToSelector:@selector(locationManager:didUpdateLocations:)] &&

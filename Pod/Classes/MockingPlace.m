@@ -20,7 +20,13 @@
 @property (nonatomic, strong) NSTimer *simulationTimer;
 @property (nonatomic) NSUInteger simulationStep;
 
+@property (nonatomic, strong) CLLocation *currentLocation;
+@property (nonatomic, strong) CLLocation *previousLocation;
+
 @end
+
+#define degreesToRadians(x) (M_PI * x / 180.0)
+#define radiandsToDegrees(x) (x * 180.0 / M_PI)
 
 @implementation MockingPlace
 
@@ -115,13 +121,13 @@
         _currentLocation = nil;
     }
     
-    NSLog(@"%@", mockLocation.locations);
-    
     [self startSimulation];
 }
 
 - (void)startSimulation
 {
+    [self stopSimulation];
+    
     if (self.mockLocation) {
         [self simulate];
     }
@@ -134,18 +140,43 @@
 
 - (void)simulate
 {
-    [self.simulationTimer invalidate];
+    self.previousLocation = self.currentLocation;
     
     if (self.mockLocation.locations.count > 1) {
         self.simulationTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(simulate) userInfo:nil repeats:NO];
     }
     
-    [NSNotificationCenter.defaultCenter postNotificationName:kMockingPlacesLocationChangedNotification object:self.mockLocation.locations[self.simulationStep]];
+    // Calculate heading and speed
+    CLLocationSpeed speed = [self.previousLocation distanceFromLocation:self.mockLocation.locations[self.simulationStep]] / [NSDate.date timeIntervalSinceDate:self.previousLocation.timestamp];
+    CLLocationDirection course = [self headingFromLocation:self.previousLocation toLocation:self.mockLocation.locations[self.simulationStep]];
+    
+    // Make a new location with the correct speed, course and date.
+    CLLocation *location = [CLLocation.alloc initWithCoordinate:self.mockLocation.locations[self.simulationStep].coordinate altitude:self.mockLocation.locations[self.simulationStep].altitude horizontalAccuracy:0 verticalAccuracy:0 course:course speed:speed timestamp:NSDate.date];
+    
+    // Assign and propagate
+    self.currentLocation = location;
+    [NSNotificationCenter.defaultCenter postNotificationName:kMockingPlacesLocationChangedNotification object:location];
     
     self.simulationStep++;
     
     if (self.simulationStep >= self.mockLocation.locations.count) {
         self.simulationStep = 0;
+    }
+}
+
+- (CFLocaleLanguageDirection)headingFromLocation:(CLLocation *)fromLocation toLocation:(CLLocation *)toLocation
+{
+    double fLat = degreesToRadians(fromLocation.coordinate.latitude);
+    double fLng = degreesToRadians(fromLocation.coordinate.longitude);
+    double tLat = degreesToRadians(toLocation.coordinate.latitude);
+    double tLng = degreesToRadians(toLocation.coordinate.longitude);
+    
+    double degree = radiandsToDegrees(atan2(sin(tLng-fLng)*cos(tLat), cos(fLat)*sin(tLat)-sin(fLat)*cos(tLat)*cos(tLng-fLng)));
+    
+    if (degree >= 0) {
+        return degree;
+    } else {
+        return 360 + degree;
     }
 }
 

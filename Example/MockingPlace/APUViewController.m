@@ -45,19 +45,9 @@
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:animated];
 }
 
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    NSLog(@"MKMapView updated location to %@", userLocation);
-}
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-    NSLog(@"CLLocationManager updated locations to %@", locations);
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
-{
-    NSLog(@"CLLocationManager updated heading to %.0f", newHeading.magneticHeading);
+    NSLog(@"CLLocationManager updated location to %@", locations.firstObject);
 }
 
 @end
