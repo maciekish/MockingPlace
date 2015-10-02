@@ -55,6 +55,7 @@
 {
     MockingPlace.sharedInstance.gestureRecognizer = [UILongPressGestureRecognizer.alloc initWithTarget:MockingPlace.sharedInstance action:@selector(handleGestureRecognizer:)];
     MockingPlace.sharedInstance.gestureRecognizer.delegate = MockingPlace.sharedInstance;
+    MockingPlace.sharedInstance.gestureRecognizer.minimumPressDuration = 2;
     MockingPlace.sharedInstance.gestureRecognizer.numberOfTouchesRequired = 2;
     
     // Wait for the UI to load
@@ -88,7 +89,15 @@
         navigationController.navigationBar.tintColor = UIColor.whiteColor;
         navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: UIColor.whiteColor};
         navigationController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-        [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:navigationController animated:YES completion:nil];
+        
+        // Find the topmost view controller
+        UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        while (topController.presentedViewController) {
+            topController = topController.presentedViewController;
+        }
+        
+        [topController presentViewController:navigationController animated:YES completion:nil];
+
         self.menuViewController = menuViewController;
     }
 }
