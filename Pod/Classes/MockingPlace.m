@@ -1,6 +1,6 @@
 //
 //  MockingPlace.m
-//  Pods
+//  MockingPlace
 //
 //  Created by Maciej Swic on 01/10/15.
 //
@@ -11,12 +11,13 @@
 @import CoreLocation;
 
 #import "CLLocationManager+MockingPlaces.h"
+#import "CLLocation+Bearing.h"
 #import "MockLocation.h"
 
 @interface MockingPlace ()
 
 @property (nonatomic, strong) UILongPressGestureRecognizer *gestureRecognizer;
-@property (nonatomic, strong) MockingPlaceMenuTableViewController *menuViewController;
+@property (nonatomic, weak) MockingPlaceMenuTableViewController *menuViewController;
 @property (nonatomic, strong) NSTimer *simulationTimer;
 @property (nonatomic) NSUInteger simulationStep;
 
@@ -25,13 +26,11 @@
 
 @end
 
-#define degreesToRadians(x) (M_PI * x / 180.0)
-#define radiandsToDegrees(x) (x * 180.0 / M_PI)
-
 @implementation MockingPlace
 
 + (void)load
 {
+    // Replace the necessary methods.
     [CLLocationManager jr_swizzleClassMethod:@selector(locationServicesEnabled) withClassMethod:@selector(mock_locationServicesEnabled) error:nil];
     [CLLocationManager jr_swizzleMethod:@selector(locationServicesEnabled) withMethod:@selector(mock_locationServicesEnabled) error:nil];
     [CLLocationManager jr_swizzleMethod:@selector(startUpdatingLocation) withMethod:@selector(mock_startUpdatingLocation) error:nil];
@@ -45,7 +44,7 @@
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        instance = [[[self class] alloc] init];
+        instance = MockingPlace.new;
     });
     
     return instance;
@@ -57,6 +56,7 @@
     MockingPlace.sharedInstance.gestureRecognizer.delegate = MockingPlace.sharedInstance;
     MockingPlace.sharedInstance.gestureRecognizer.numberOfTouchesRequired = 2;
     
+    // Wait for the UI to load
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIApplication.sharedApplication.keyWindow addGestureRecognizer:MockingPlace.sharedInstance.gestureRecognizer];
     });
@@ -67,17 +67,20 @@
     if (MockingPlace.sharedInstance.gestureRecognizer) {
         [UIApplication.sharedApplication.keyWindow removeGestureRecognizer:MockingPlace.sharedInstance.gestureRecognizer];
     }
+    
+    [MockingPlace.sharedInstance stopSimulation];
 }
 
 - (void)showMenu:(UILongPressGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         if (!self.menuViewController) {
-            self.menuViewController = [MockingPlaceMenuTableViewController.alloc initWithStyle:UITableViewStylePlain andMockLocations:self.availableLocations];
-            self.menuViewController.delegate = self;
+            MockingPlaceMenuTableViewController *menuViewController = [MockingPlaceMenuTableViewController.alloc initWithStyle:UITableViewStylePlain andMockLocations:self.availableLocations];
+            menuViewController.delegate = self;
             
-            UINavigationController *navigationController = [UINavigationController.alloc initWithRootViewController:self.menuViewController];
+            UINavigationController *navigationController = [UINavigationController.alloc initWithRootViewController:menuViewController];
             [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:navigationController animated:YES completion:nil];
+            self.menuViewController = menuViewController;
         }
     }
 }
@@ -87,11 +90,6 @@
 - (void)placeMenuViewController:(MockingPlaceMenuTableViewController *)viewController didSelectMockLocation:(MockLocation *)mockLocation
 {
     self.mockLocation = mockLocation;
-}
-
-- (void)placeMenuViewControllerDidDisappear:(MockingPlaceMenuTableViewController *)viewController
-{
-    self.menuViewController = nil;
 }
 
 #pragma mark - Private
@@ -104,8 +102,11 @@
     for (NSString *filePath in filePaths) {
         NSString *fileName = filePath.lastPathComponent.stringByDeletingPathExtension.capitalizedString;
         
-        MockLocation *mockLocation = [MockLocation.alloc initWithTitle:fileName andPath:filePath];
-        [locations addObject:mockLocation];
+        // Ignore coverage.geojson
+        if (![fileName.lowercaseString isEqualToString:@"coverage"]) {
+            MockLocation *mockLocation = [MockLocation.alloc initWithTitle:fileName andPath:filePath];
+            [locations addObject:mockLocation];
+        }
     }
     
     [locations sortUsingSelector:@selector(compareTitle:)];
@@ -118,25 +119,12 @@
     _mockLocation = mockLocation;
     _simulationStep = 0;
     
-    if (!_mockLocation) {
-        _currentLocation = nil;
-    }
-    
-    [self startSimulation];
-}
-
-- (void)startSimulation
-{
-    [self stopSimulation];
-    
-    if (self.mockLocation) {
+    if (_mockLocation) {
+        [self stopSimulation];
         [self simulate];
+    } else {
+        [self stopSimulation];
     }
-}
-
-- (void)stopSimulation
-{
-    [self.simulationTimer invalidate];
 }
 
 - (void)simulate
@@ -145,15 +133,13 @@
     
     if (self.mockLocation.locations.count == 0) {
         [[UIAlertView.alloc initWithTitle:@"Error" message:@"Couldn't parse your geojson. Check the example files at https://www.github.com/maciekish/MockingPlace" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-    }
-    
-    if (self.mockLocation.locations.count > 1) {
+    } else if (self.mockLocation.locations.count > 1) {
         self.simulationTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(simulate) userInfo:nil repeats:NO];
     }
     
     // Calculate heading and speed
     CLLocationSpeed speed = [self.previousLocation distanceFromLocation:self.mockLocation.locations[self.simulationStep]] / [NSDate.date timeIntervalSinceDate:self.previousLocation.timestamp];
-    CLLocationDirection course = [self headingFromLocation:self.previousLocation toLocation:self.mockLocation.locations[self.simulationStep]];
+    CLLocationDirection course = [self.previousLocation bearingToLocation:self.mockLocation.locations[self.simulationStep]];
     
     // Make a new location with the correct speed, course and date.
     CLLocation *location = [CLLocation.alloc initWithCoordinate:self.mockLocation.locations[self.simulationStep].coordinate altitude:self.mockLocation.locations[self.simulationStep].altitude horizontalAccuracy:0 verticalAccuracy:0 course:course speed:speed timestamp:NSDate.date];
@@ -162,27 +148,17 @@
     self.currentLocation = location;
     [NSNotificationCenter.defaultCenter postNotificationName:kMockingPlacesLocationChangedNotification object:location];
     
+    // Go to next coordinate if track
     self.simulationStep++;
-    
     if (self.simulationStep >= self.mockLocation.locations.count) {
         self.simulationStep = 0;
     }
 }
 
-- (CFLocaleLanguageDirection)headingFromLocation:(CLLocation *)fromLocation toLocation:(CLLocation *)toLocation
+- (void)stopSimulation
 {
-    double fLat = degreesToRadians(fromLocation.coordinate.latitude);
-    double fLng = degreesToRadians(fromLocation.coordinate.longitude);
-    double tLat = degreesToRadians(toLocation.coordinate.latitude);
-    double tLng = degreesToRadians(toLocation.coordinate.longitude);
-    
-    double degree = radiandsToDegrees(atan2(sin(tLng-fLng)*cos(tLat), cos(fLat)*sin(tLat)-sin(fLat)*cos(tLat)*cos(tLng-fLng)));
-    
-    if (degree >= 0) {
-        return degree;
-    } else {
-        return 360 + degree;
-    }
+    self.currentLocation = nil;
+    [self.simulationTimer invalidate];
 }
 
 #pragma mark - UIGestureRecognizerDelegate

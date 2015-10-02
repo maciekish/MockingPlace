@@ -1,6 +1,6 @@
 //
 //  MockingPlace.h
-//  Pods
+//  MockingPlace
 //
 //  Created by Maciej Swic on 01/10/15.
 //
@@ -18,11 +18,22 @@
 @property (nonatomic, strong) MockLocation *mockLocation;
 
 /**
- *  The current simulated location
+ *  The currently simulated location
  */
 @property (nonatomic, readonly) CLLocation *currentLocation;
 
 + (instancetype)sharedInstance;
+
+/**
+ *  Enables the gesture recognizer which brings up the locations menu.
+ *  This does not start the simulation until you select a geojson file in the menu which
+ *  is brought up by a two finger long press on the screen.
+ */
 + (void)enable;
+
+/**
+ *  Disables the gesture recognizer and stops the current simulation.
+ */
++ (void)disable;
 
 @end

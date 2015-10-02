@@ -126,6 +126,8 @@
 		BD67148108038219693A933AD9E80CD3 /* EXPMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 2656F5172AF45D751D24752AED74D8B0 /* EXPMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BDA77001B1203435F2B347E160EF8994 /* EXPMatchers+endWith.m in Sources */ = {isa = PBXBuildFile; fileRef = 301A90E5FAF359ADE20B5691FD26D202 /* EXPMatchers+endWith.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BFE9C322CD162056602CB84E60E73DA9 /* EXPMatchers+beFalsy.h in Headers */ = {isa = PBXBuildFile; fileRef = CEAD26AC5F2C70F2244999D989D5F085 /* EXPMatchers+beFalsy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C19F0C8C1BBE754F0056EB52 /* CLLocation+Bearing.h in Headers */ = {isa = PBXBuildFile; fileRef = C19F0C8A1BBE754F0056EB52 /* CLLocation+Bearing.h */; settings = {ASSET_TAGS = (); }; };
+		C19F0C8D1BBE754F0056EB52 /* CLLocation+Bearing.m in Sources */ = {isa = PBXBuildFile; fileRef = C19F0C8B1BBE754F0056EB52 /* CLLocation+Bearing.m */; settings = {ASSET_TAGS = (); }; };
 		C3D0A772CB387B9BE1AFB67072D26EC6 /* EXPMatchers+conformTo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC26A42BBF716F84327600DC72CB7CB /* EXPMatchers+conformTo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C41D6A42EBAE71716A5DE5B308CACEAD /* SPTTestSuite.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE83B2387DB2F6D963112C04A0B5D84 /* SPTTestSuite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C46FFAC5D32903B558284E1EA807B706 /* SPTTestSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 805959EBF6E02F5744686D26C9C35A1E /* SPTTestSuite.m */; };
@@ -414,6 +416,8 @@
 		BDFCEA3BED95DA67878D8A07C55031A1 /* Expecta_Snapshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Expecta_Snapshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBB14B5B19F0EE952F6C1507635B68B /* SpectaUtility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SpectaUtility.m; path = Specta/Specta/SpectaUtility.m; sourceTree = "<group>"; };
 		BF39BF408C4FC2979239A03D669ED8C5 /* FBSnapshotTestCasePlatform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestCasePlatform.h; path = FBSnapshotTestCase/FBSnapshotTestCasePlatform.h; sourceTree = "<group>"; };
+		C19F0C8A1BBE754F0056EB52 /* CLLocation+Bearing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+Bearing.h"; sourceTree = "<group>"; };
+		C19F0C8B1BBE754F0056EB52 /* CLLocation+Bearing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+Bearing.m"; sourceTree = "<group>"; };
 		C24DDF51C2D9111C622D67D5F63A99CD /* MockingPlace-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MockingPlace-dummy.m"; sourceTree = "<group>"; };
 		C69051845A562F39E30A55AA75AE53A1 /* Pods-MockingPlace_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MockingPlace_Example.release.xcconfig"; sourceTree = "<group>"; };
 		C6EB829FBCACED319F62E2BA4CC0E8CC /* MockingPlaceMenuTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MockingPlaceMenuTableViewController.m; sourceTree = "<group>"; };
@@ -557,6 +561,8 @@
 		0A3EB4A3BDAB4D5217B019BFF3C060FF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C19F0C8A1BBE754F0056EB52 /* CLLocation+Bearing.h */,
+				C19F0C8B1BBE754F0056EB52 /* CLLocation+Bearing.m */,
 				E186107D7F4FBEF7ACE69A4604DB3027 /* CLLocationManager+MockingPlaces.h */,
 				01101F08419C945191A979CA06198708 /* CLLocationManager+MockingPlaces.m */,
 				9731AD275ED5B407CBE52402D057454E /* MockingPlace.h */,
@@ -955,6 +961,7 @@
 				AE2B7C9B475F03885EA791D4B62DAFCF /* CLLocationManager+MockingPlaces.h in Headers */,
 				2ACCECAF32007550116FAEDFB8C381D2 /* MockingPlace-umbrella.h in Headers */,
 				94BB39C273A72602C946F0ED87A877C5 /* MockingPlace.h in Headers */,
+				C19F0C8C1BBE754F0056EB52 /* CLLocation+Bearing.h in Headers */,
 				13A4F40E49E679A2D3012B6D23C96CDB /* MockingPlaceMenuTableViewController.h in Headers */,
 				FC3E88026BBF2A18F5924D4C4A9917AD /* MockLocation.h in Headers */,
 			);
@@ -1341,6 +1348,7 @@
 				58584BFA8100B6B1D2EF574605387FFE /* MockingPlace-dummy.m in Sources */,
 				A17839F7A76DE261E6EB626B4248554F /* MockingPlace.m in Sources */,
 				952FFCD7E649B55661DD17F5E87BEA26 /* MockingPlaceMenuTableViewController.m in Sources */,
+				C19F0C8D1BBE754F0056EB52 /* CLLocation+Bearing.m in Sources */,
 				B408264C8D3ADC55E1184F05E2AB4BBF /* MockLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

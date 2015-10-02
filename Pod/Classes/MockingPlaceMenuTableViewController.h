@@ -1,6 +1,6 @@
 //
 //  MockingPlaceMenuTableViewController.h
-//  Pods
+//  MockingPlace
 //
 //  Created by Maciej Swic on 01/10/15.
 //
@@ -13,7 +13,6 @@
 @protocol MockingPlaceMenuTableViewControllerDelegate <NSObject>
 
 - (void)placeMenuViewController:(MockingPlaceMenuTableViewController *)viewController didSelectMockLocation:(MockLocation *)mockLocation;
-- (void)placeMenuViewControllerDidDisappear:(MockingPlaceMenuTableViewController *)viewController;
 
 @end
 

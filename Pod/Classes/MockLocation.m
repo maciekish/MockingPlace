@@ -1,6 +1,6 @@
 //
 //  MockLocation.m
-//  Pods
+//  MockingPlace
 //
 //  Created by Maciej Swic on 01/10/15.
 //

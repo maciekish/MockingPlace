@@ -46,6 +46,7 @@ NSString *const kMockingPlacesLocationChangedNotification = @"kMockingPlacesLoca
     return MockingPlace.sharedInstance.currentLocation;
 }
 
+// MockingPlace sends a notification with the new location each time the simulated location changes. All CLLocationmanagers pick it up here and propagate it to their delegates.
 - (void)locationUpdated:(NSNotification *)notification
 {
     if ([notification.object isKindOfClass:CLLocation.class]) {

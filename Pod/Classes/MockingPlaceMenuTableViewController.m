@@ -1,6 +1,6 @@
 //
 //  MockingPlaceMenuTableViewController.m
-//  Pods
+//  MockingPlace
 //
 //  Created by Maciej Swic on 01/10/15.
 //
@@ -9,6 +9,7 @@
 #import "MockingPlaceMenuTableViewController.h"
 @import CoreLocation;
 
+#import "MockingPlace.h"
 #import "MockLocation.h"
 
 #define kMockingPlaceCellIdentifier @"MockingPlaceCell"
@@ -38,17 +39,11 @@
     [super viewDidLoad];
     
     self.title = @"MockingPlace";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem.alloc initWithTitle:@"Disable" style:UIBarButtonItemStylePlain target:self action:@selector(disable)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem.alloc initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
     
-    if ([self.delegate respondsToSelector:@selector(placeMenuViewControllerDidDisappear:)]) {
-        [self.delegate placeMenuViewControllerDidDisappear:self];
-    }
+    // Provide a stop button for routes
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem.alloc initWithTitle:@"Stop" style:UIBarButtonItemStylePlain target:self action:@selector(stop)];
+    self.navigationItem.leftBarButtonItem.enabled = MockingPlace.sharedInstance.mockLocation.locations.count > 1;
 }
 
 - (void)done
@@ -56,11 +51,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)disable
+- (void)stop
 {
     if ([self.delegate respondsToSelector:@selector(placeMenuViewController:didSelectMockLocation:)]) {
         [self.delegate placeMenuViewController:self didSelectMockLocation:nil];
     }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -77,7 +74,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMockingPlaceCellIdentifier forIndexPath:indexPath];
     
     if (!cell) {
-        cell = [UITableViewCell.alloc initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kMockingPlaceCellIdentifier];
+        cell = [UITableViewCell.alloc initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kMockingPlaceCellIdentifier];
     }
     
     [self configureCell:cell forIndexPath:indexPath];

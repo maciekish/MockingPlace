@@ -21,9 +21,9 @@
 {
     [super viewDidLoad];
     
-#ifdef DEBUG
+    #ifdef DEBUG
     [MockingPlace enable];
-#endif
+    #endif
 }
 
 - (void)viewDidAppear:(BOOL)animated
