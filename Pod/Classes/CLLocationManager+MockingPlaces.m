@@ -6,6 +6,7 @@
 //
 //
 
+#import "CLHeading+Init.h"
 #import "CLLocationManager+MockingPlaces.h"
 #import "MockingPlace.h"
 
@@ -14,6 +15,11 @@ NSString *const kMockingPlacesLocationChangedNotification = @"kMockingPlacesLoca
 @implementation CLLocationManager (MockingPlaces)
 
 + (BOOL)mock_locationServicesEnabled;
+{
+    return YES;
+}
+
++ (BOOL)mock_headingAvailable
 {
     return YES;
 }
@@ -54,6 +60,12 @@ NSString *const kMockingPlacesLocationChangedNotification = @"kMockingPlacesLoca
         
         if ([self.delegate respondsToSelector:@selector(locationManager:didUpdateLocations:)]) {
             [self.delegate locationManager:self didUpdateLocations:@[location]];
+        }
+        
+        CLHeading *heading = [CLHeading.alloc initWithHeading:location.course accuracy:0];
+        
+        if ([self.delegate respondsToSelector:@selector(locationManager:didUpdateHeading:)]) {
+            [self.delegate locationManager:self didUpdateHeading:heading];
         }
     }
 }

@@ -50,4 +50,9 @@
     NSLog(@"CLLocationManager updated location to %@", locations.firstObject);
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
+{
+    NSLog(@"CLLocationManager updated heading to %@", newHeading);
+}
+
 @end

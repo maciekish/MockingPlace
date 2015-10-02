@@ -14,7 +14,7 @@ MockingPlace plays back GeoJSON tracks and coordinates because Xcode does not do
 * Include some .geojson files in your target.
 * You can use http://mapbox.github.io/togeojson/ or http://converter.mygeodata.eu to convert your GPX files to GeoJSON
 * `@import MockingPlace;` or `#import <MockingPlace/MockingPlace.h>` if your are not using modules.
-* Add `[MockingPlace enable];` somewhere after app launch. You may want to wrap this in `#ifdef DEBUG` to avoid shipping you app with MockingPlace enabled (But you can!).
+* Add `[MockingPlace enable];` somewhere after app launch. You should wrap this in `#ifdef DEBUG` to avoid shipping you app with MockingPlace enabled (It calls one private method to simulate heading updates).
 * Run your app and long press with two fingers anywhere to bring up the track selection menu. In the simulator hold down <kbd>ALT</kbd> and hold down the mouse button to simulate a long two finger press.
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first. The example project contains two example GeoJSON files.

@@ -14,6 +14,7 @@ UIKIT_EXTERN NSString *const kMockingPlacesLocationChangedNotification;
 @interface CLLocationManager (MockingPlaces)
 
 + (BOOL)mock_locationServicesEnabled;
++ (BOOL)mock_headingAvailable;
 + (CLAuthorizationStatus)mock_authorizationStatus;
 
 - (void)mock_startUpdatingLocation;

@@ -32,6 +32,7 @@
 {
     // Replace the necessary methods.
     [CLLocationManager jr_swizzleClassMethod:@selector(locationServicesEnabled) withClassMethod:@selector(mock_locationServicesEnabled) error:nil];
+    [CLLocationManager jr_swizzleClassMethod:@selector(headingAvailable) withClassMethod:@selector(mock_headingAvailable) error:nil];
     [CLLocationManager jr_swizzleMethod:@selector(locationServicesEnabled) withMethod:@selector(mock_locationServicesEnabled) error:nil];
     [CLLocationManager jr_swizzleMethod:@selector(startUpdatingLocation) withMethod:@selector(mock_startUpdatingLocation) error:nil];
     [CLLocationManager jr_swizzleMethod:@selector(stopUpdatingLocation) withMethod:@selector(mock_stopUpdatingLocation) error:nil];

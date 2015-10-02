@@ -134,6 +134,7 @@
 		BC4DE526A6BA586ABCB3F331ECE94389 /* EXPMatchers+beInTheRangeOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 6806214680F68CCD0B72340864E01D42 /* EXPMatchers+beInTheRangeOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BE5EED5DA9B8EF0CF600AE9061499909 /* NSObject+Expecta.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B948FA9BF4F44CAF0731516AA922F9F /* NSObject+Expecta.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C08A9A1F35351F353DB2CDF89E99AF64 /* NSValue+Expecta.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E55507B98BA321670007649BCF02CCD /* NSValue+Expecta.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C19F0CA81BBE82F70056EB52 /* CLHeading+Init.h in Headers */ = {isa = PBXBuildFile; fileRef = C19F0CA71BBE82F70056EB52 /* CLHeading+Init.h */; settings = {ASSET_TAGS = (); }; };
 		C2D9CE87DCB6E302F8FD8F5CD4FC0D79 /* SPTCompiledExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 608422915A304231405A0C42DE119473 /* SPTCompiledExample.m */; };
 		C2E4E141EF8A24585EEE0AA666C94C9E /* XCTestCase+Specta.h in Headers */ = {isa = PBXBuildFile; fileRef = 083143C2CE3B2A07B335E67EEE4BF64F /* XCTestCase+Specta.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C49C9E78B14453C94A98B94E25BE990D /* SPTExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 694131A803431750CB64C40E6BD66600 /* SPTExample.m */; };
@@ -403,6 +404,7 @@
 		C146243879B7C43B90672CC705FE877C /* EXPMatchers+haveCountOf.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+haveCountOf.m"; path = "Expecta/Matchers/EXPMatchers+haveCountOf.m"; sourceTree = "<group>"; };
 		C14E88B3B1F31AA518106D235434F9FC /* FBSnapshotTestCase-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FBSnapshotTestCase-dummy.m"; sourceTree = "<group>"; };
 		C160356FE87823C89955F0FCB14A22CF /* MockingPlace-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MockingPlace-Private.xcconfig"; sourceTree = "<group>"; };
+		C19F0CA71BBE82F70056EB52 /* CLHeading+Init.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLHeading+Init.h"; sourceTree = "<group>"; };
 		C69051845A562F39E30A55AA75AE53A1 /* Pods-MockingPlace_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MockingPlace_Example.release.xcconfig"; sourceTree = "<group>"; };
 		C6FDF2DD8C666958ADBB3FC9D4F38930 /* NSValue+Expecta.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSValue+Expecta.m"; path = "Expecta/NSValue+Expecta.m"; sourceTree = "<group>"; };
 		C8603A711C5EBA8471AFB240B8CA6CC1 /* EXPMatchers+beSubclassOf.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beSubclassOf.m"; path = "Expecta/Matchers/EXPMatchers+beSubclassOf.m"; sourceTree = "<group>"; };
@@ -760,16 +762,17 @@
 		443B6D619B5A5713D37426504846424C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C19F0CA71BBE82F70056EB52 /* CLHeading+Init.h */,
 				FA5BE2880846925E3AEF0390383636ED /* CLLocation+Bearing.h */,
 				EFEC83A71220DD7A07A586F9E6AFBEF2 /* CLLocation+Bearing.m */,
 				F2167F4C9450BF99CDF4EF36EEE35C8B /* CLLocationManager+MockingPlaces.h */,
 				132DD06A51D0F4A9AA87A7E38DFBAD33 /* CLLocationManager+MockingPlaces.m */,
-				0BAEE8F948F2678308AD178050BB9172 /* MSWMockLocation.h */,
-				7DE96A951A8CF286B6354009327998CF /* MSWMockLocation.m */,
 				5A8F8D3616A4A5D28D38D698A207C7C9 /* MockingPlace.h */,
 				CA9A30ABC9A8A21EED9018A950B64C56 /* MockingPlace.m */,
 				4520E72D657E790146CC4801BB4EC18A /* MockingPlaceMenuTableViewController.h */,
 				33C2038E8604944EE77EEC40928938E5 /* MockingPlaceMenuTableViewController.m */,
+				0BAEE8F948F2678308AD178050BB9172 /* MSWMockLocation.h */,
+				7DE96A951A8CF286B6354009327998CF /* MSWMockLocation.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1042,6 +1045,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C19F0CA81BBE82F70056EB52 /* CLHeading+Init.h in Headers */,
 				5B98DD3435E8A1B92BA1A8C8AE08344E /* CLLocation+Bearing.h in Headers */,
 				50A7265DA43899F2DA5EC61B84E1395E /* CLLocationManager+MockingPlaces.h in Headers */,
 				01EA1D24E7BF24EB1E5B5CADADE83395 /* MSWMockLocation.h in Headers */,
