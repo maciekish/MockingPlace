@@ -12,7 +12,7 @@
 
 #import "CLLocationManager+MockingPlaces.h"
 #import "CLLocation+Bearing.h"
-#import "MSwMockLocation.h"
+#import "MSWMockLocation.h"
 
 @interface MockingPlace ()
 
