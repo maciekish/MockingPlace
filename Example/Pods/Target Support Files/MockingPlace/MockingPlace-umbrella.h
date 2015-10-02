@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 
+#import "CLHeading+Init.h"
 #import "CLLocation+Bearing.h"
 #import "CLLocationManager+MockingPlaces.h"
 #import "MockingPlace.h"
