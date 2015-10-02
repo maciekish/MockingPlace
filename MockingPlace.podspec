@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MockingPlace"
-  s.version          = "0.1.3"
+  s.version          = "0.1.4"
   s.summary          = "A complete CLLocationManager simulator."
 
   s.description      = <<-DESC

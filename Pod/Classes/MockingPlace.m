@@ -54,7 +54,8 @@
 + (void)enable
 {
     MockingPlace.sharedInstance.gestureRecognizer = [UILongPressGestureRecognizer.alloc initWithTarget:MockingPlace.sharedInstance action:@selector(showMenu:)];
-    MockingPlace.sharedInstance.gestureRecognizer.numberOfTapsRequired = 1;
+    MockingPlace.sharedInstance.gestureRecognizer.delegate = MockingPlace.sharedInstance;
+    MockingPlace.sharedInstance.gestureRecognizer.numberOfTouchesRequired = 2;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIApplication.sharedApplication.keyWindow addGestureRecognizer:MockingPlace.sharedInstance.gestureRecognizer];
