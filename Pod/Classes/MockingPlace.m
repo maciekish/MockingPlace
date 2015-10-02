@@ -17,7 +17,7 @@
 @interface MockingPlace ()
 
 @property (nonatomic, strong) UILongPressGestureRecognizer *gestureRecognizer;
-@property (nonatomic, weak) MockingPlaceMenuTableViewController *menuViewController;
+@property (nonatomic, weak) MSWMockingPlaceMenuTableViewController *menuViewController;
 @property (nonatomic, strong) NSTimer *simulationTimer;
 @property (nonatomic) NSUInteger simulationStep;
 
@@ -76,10 +76,14 @@
 {
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         if (!self.menuViewController) {
-            MockingPlaceMenuTableViewController *menuViewController = [MockingPlaceMenuTableViewController.alloc initWithStyle:UITableViewStylePlain andMockLocations:self.availableLocations];
+            MSWMockingPlaceMenuTableViewController *menuViewController = [MSWMockingPlaceMenuTableViewController.alloc initWithStyle:UITableViewStylePlain andMockLocations:self.availableLocations];
             menuViewController.delegate = self;
             
             UINavigationController *navigationController = [UINavigationController.alloc initWithRootViewController:menuViewController];
+            navigationController.navigationBar.barTintColor = UIColor.darkGrayColor;
+            navigationController.navigationBar.tintColor = UIColor.whiteColor;
+            navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: UIColor.whiteColor};
+            navigationController.modalPresentationStyle = UIModalPresentationOverFullScreen;
             [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:navigationController animated:YES completion:nil];
             self.menuViewController = menuViewController;
         }
@@ -88,7 +92,7 @@
 
 #pragma mark - MockPlaceMenu Delegate
 
-- (void)placeMenuViewController:(MockingPlaceMenuTableViewController *)viewController didSelectMockLocation:(MSWMockLocation *)mockLocation
+- (void)placeMenuViewController:(MSWMockingPlaceMenuTableViewController *)viewController didSelectMockLocation:(MSWMockLocation *)mockLocation
 {
     self.mockLocation = mockLocation;
 }

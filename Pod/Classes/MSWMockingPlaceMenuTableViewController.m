@@ -1,12 +1,12 @@
 //
-//  MockingPlaceMenuTableViewController.m
+//  MSWMockingPlaceMenuTableViewController.m
 //  MockingPlace
 //
 //  Created by Maciej Swic on 01/10/15.
 //
 //
 
-#import "MockingPlaceMenuTableViewController.h"
+#import "MSWMockingPlaceMenuTableViewController.h"
 @import CoreLocation;
 
 #import "MockingPlace.h"
@@ -14,13 +14,14 @@
 
 #define kMockingPlaceCellIdentifier @"MockingPlaceCell"
 
-@interface MockingPlaceMenuTableViewController ()
+@interface MSWMockingPlaceMenuTableViewController ()
 
 @property (nonatomic, strong) NSArray<MSWMockLocation *> *locations;
+@property (nonatomic, strong) UIBlurEffect *blurEffect;
 
 @end
 
-@implementation MockingPlaceMenuTableViewController
+@implementation MSWMockingPlaceMenuTableViewController
 
 - (instancetype)initWithStyle:(UITableViewStyle)style andMockLocations:(NSArray<MSWMockLocation *> *)mockLocations
 {
@@ -28,6 +29,18 @@
     
     if (self) {
         self.locations = mockLocations;
+        
+        if (NSClassFromString(@"UIVisualEffectView") &&
+            !UIAccessibilityIsReduceTransparencyEnabled()) {
+            self.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+            UIVisualEffectView *blurEffectView = [UIVisualEffectView.alloc initWithEffect:self.blurEffect];
+            blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight; // Less code than using autolayout.
+            [blurEffectView setFrame:self.tableView.frame];
+            
+            self.tableView.backgroundColor = UIColor.clearColor;
+            self.tableView.separatorEffect = [UIVibrancyEffect effectForBlurEffect:self.blurEffect];
+            self.tableView.backgroundView = (UIView *)blurEffectView;
+        }
         
         [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:kMockingPlaceCellIdentifier];
     }
@@ -71,13 +84,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMockingPlaceCellIdentifier forIndexPath:indexPath];
     
-    if (!cell) {
-        cell = [UITableViewCell.alloc initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kMockingPlaceCellIdentifier];
-    }
-    
     [self configureCell:cell forIndexPath:indexPath];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Tag 1 is used to tell whether the cell has the effect view added to it. MockingPlace is about location simulation and i don't think this warrants its own UITableView subclass.
+    if (cell.contentView.tag != 1) {
+        cell.backgroundColor = UIColor.clearColor;
+        
+        UILabel *textLabel = cell.textLabel;
+        [textLabel removeFromSuperview];
+        
+        UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:self.blurEffect];
+        UIVisualEffectView *effectView = [UIVisualEffectView.alloc initWithEffect:vibrancyEffect];
+        effectView.frame = cell.contentView.bounds;
+        effectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [effectView.contentView addSubview:textLabel];
+        textLabel.frame = cell.contentView.bounds;
+        [cell.contentView addSubview:effectView];
+        
+        cell.contentView.tag = 1;
+    }
 }
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath

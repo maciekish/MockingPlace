@@ -80,7 +80,7 @@
 		65BC31095CCDFC80CBF6BBA843751F23 /* EXPMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 2656F5172AF45D751D24752AED74D8B0 /* EXPMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		66A27898E989A3FA5C15AA671C4536F0 /* EXPMatchers+beIdenticalTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B072318709624931B456BA9131F6BF2 /* EXPMatchers+beIdenticalTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		67459AD239EF669A365519E06B45DCFE /* EXPExpect.h in Headers */ = {isa = PBXBuildFile; fileRef = A524CBA35E972B118E15A1EEFD754064 /* EXPExpect.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		684DA3612EB0C58C4CC3539D9441F9F0 /* MockingPlaceMenuTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8421DE5AB6BE5692BD7F451AFE609182 /* MockingPlaceMenuTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		684DA3612EB0C58C4CC3539D9441F9F0 /* MSWMockingPlaceMenuTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8421DE5AB6BE5692BD7F451AFE609182 /* MSWMockingPlaceMenuTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		69CBFF5B7699798C1340A06FBA5988D5 /* FBSnapshotTestCasePlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 1533BC0DE902D651A9C5C823338596C1 /* FBSnapshotTestCasePlatform.m */; };
 		6E1D978790705E137FDE439AA68DD3AA /* EXPFloatTuple.h in Headers */ = {isa = PBXBuildFile; fileRef = FAAFF20F47FC1B75CFCB6D35E218FE7B /* EXPFloatTuple.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E5661925E13A6B4D43A12F8805E27D4 /* JRSwizzle-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 58FC9389180FE49F7CD367C79C09B4CA /* JRSwizzle-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -137,7 +137,7 @@
 		C9A3CF48E7B1143CF4F104E48D568307 /* Pods-MockingPlace_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1944FCE94351EC4D3CBB5F34C480AECE /* Pods-MockingPlace_Example-dummy.m */; };
 		CE3F4ECBB0BC095577D66AE50C8E604C /* EXPFloatTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 495648B7189482700967ABA36C633007 /* EXPFloatTuple.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CF94AC858058402A44E70A00072DA8FF /* MockingPlace.h in Headers */ = {isa = PBXBuildFile; fileRef = 9749B07E606DCDE7A3CB32CC6CF6E2F1 /* MockingPlace.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D1E48C1ECF3B37CA5A795A517236769D /* MockingPlaceMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D03F00EE828754D8C409BCAC8A238C /* MockingPlaceMenuTableViewController.m */; };
+		D1E48C1ECF3B37CA5A795A517236769D /* MSWMockingPlaceMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D03F00EE828754D8C409BCAC8A238C /* MSWMockingPlaceMenuTableViewController.m */; };
 		D43F15ED3C217403DCBF5954B3E8B33D /* SpectaDSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E53604F6E2F42606A52F781DB8D9308 /* SpectaDSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6838E42D9C50FC39B1D3006C0724E9C /* Expecta+Snapshots-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A83CB1ED2622DBFDBBE9011FA727D30 /* Expecta+Snapshots-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7F64744555CA8BE0EBC6BC7B03C4DF4 /* ExpectaObject+FBSnapshotTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B04C88AE8E6041F32101BDE61F02BB15 /* ExpectaObject+FBSnapshotTest.m */; };
@@ -361,7 +361,7 @@
 		8266F8E89727A043EBA54193FF76C285 /* Pods-MockingPlace_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MockingPlace_Tests-umbrella.h"; sourceTree = "<group>"; };
 		82A9BD9EEDAACB02C87ED1724B7C642E /* EXPMatchers+beTruthy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beTruthy.m"; path = "Expecta/Matchers/EXPMatchers+beTruthy.m"; sourceTree = "<group>"; };
 		840F4B10CBE6A32F54D8569EAC869C64 /* EXPMatchers+beInstanceOf.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beInstanceOf.m"; path = "Expecta/Matchers/EXPMatchers+beInstanceOf.m"; sourceTree = "<group>"; };
-		8421DE5AB6BE5692BD7F451AFE609182 /* MockingPlaceMenuTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MockingPlaceMenuTableViewController.h; sourceTree = "<group>"; };
+		8421DE5AB6BE5692BD7F451AFE609182 /* MSWMockingPlaceMenuTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MSWMockingPlaceMenuTableViewController.h; sourceTree = "<group>"; };
 		867D9D335DEA9C7704E418B91F737440 /* EXPMatchers+beGreaterThan.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beGreaterThan.m"; path = "Expecta/Matchers/EXPMatchers+beGreaterThan.m"; sourceTree = "<group>"; };
 		8945CD09ADB87D4F3F8F48578B44B58D /* EXPMatchers+equal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+equal.h"; path = "Expecta/Matchers/EXPMatchers+equal.h"; sourceTree = "<group>"; };
 		8B8021FFBEC37BD9E502FAFB6A27EB9D /* EXPMatchers+beInstanceOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beInstanceOf.h"; path = "Expecta/Matchers/EXPMatchers+beInstanceOf.h"; sourceTree = "<group>"; };
@@ -416,7 +416,7 @@
 		BA887EA27EB254D662A02959E7E5AF3D /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCase.m; path = FBSnapshotTestCase/FBSnapshotTestCase.m; sourceTree = "<group>"; };
 		BA9076DF54AC4AAE40619ACCA03F6EB9 /* Expecta+Snapshots.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Expecta+Snapshots.modulemap"; sourceTree = "<group>"; };
 		BBD6400426D824ED73ED9FBD5C41ECC2 /* EXPMatchers+beSubclassOf.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beSubclassOf.m"; path = "Expecta/Matchers/EXPMatchers+beSubclassOf.m"; sourceTree = "<group>"; };
-		C0D03F00EE828754D8C409BCAC8A238C /* MockingPlaceMenuTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MockingPlaceMenuTableViewController.m; sourceTree = "<group>"; };
+		C0D03F00EE828754D8C409BCAC8A238C /* MSWMockingPlaceMenuTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MSWMockingPlaceMenuTableViewController.m; sourceTree = "<group>"; };
 		C2EAA584F60FFE2FC89C920EBE1C4F10 /* CLHeading+Init.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CLHeading+Init.h"; sourceTree = "<group>"; };
 		C712F4E1A4D26188A12A88900D6A8848 /* EXPMatchers+beTruthy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beTruthy.h"; path = "Expecta/Matchers/EXPMatchers+beTruthy.h"; sourceTree = "<group>"; };
 		C7E8A634DB300030778893B8E57E808D /* Expecta+Snapshots-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Expecta+Snapshots-prefix.pch"; sourceTree = "<group>"; };
@@ -821,8 +821,8 @@
 				1E19A1D2074769A24EBB06B2C3858BF8 /* CLLocationManager+MockingPlaces.m */,
 				9749B07E606DCDE7A3CB32CC6CF6E2F1 /* MockingPlace.h */,
 				FB7C6A9C78281D2547B546EF1296E0BA /* MockingPlace.m */,
-				8421DE5AB6BE5692BD7F451AFE609182 /* MockingPlaceMenuTableViewController.h */,
-				C0D03F00EE828754D8C409BCAC8A238C /* MockingPlaceMenuTableViewController.m */,
+				8421DE5AB6BE5692BD7F451AFE609182 /* MSWMockingPlaceMenuTableViewController.h */,
+				C0D03F00EE828754D8C409BCAC8A238C /* MSWMockingPlaceMenuTableViewController.m */,
 				F2DD4E2597501719C220CE270BE15A38 /* MSWMockLocation.h */,
 				D7C018344408DF2C8136BB7C35D0A645 /* MSWMockLocation.m */,
 			);
@@ -1069,7 +1069,7 @@
 				FB5F4C059DED31497ADE30C2FA60AF6E /* CLLocationManager+MockingPlaces.h in Headers */,
 				9B36DBA5B9281A80CFF06310DC262B3D /* MockingPlace-umbrella.h in Headers */,
 				CF94AC858058402A44E70A00072DA8FF /* MockingPlace.h in Headers */,
-				684DA3612EB0C58C4CC3539D9441F9F0 /* MockingPlaceMenuTableViewController.h in Headers */,
+				684DA3612EB0C58C4CC3539D9441F9F0 /* MSWMockingPlaceMenuTableViewController.h in Headers */,
 				A3F48F1AE167C1F3F122EAA7145EC0A7 /* MSWMockLocation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1320,7 +1320,7 @@
 				9C42BAE0D6E9D7943B77EEA20110A76B /* CLLocationManager+MockingPlaces.m in Sources */,
 				E792EB9CB110DC11CD732FA206EAEE08 /* MockingPlace-dummy.m in Sources */,
 				A4CFEE088A436FF560B97A3ABB6EDF19 /* MockingPlace.m in Sources */,
-				D1E48C1ECF3B37CA5A795A517236769D /* MockingPlaceMenuTableViewController.m in Sources */,
+				D1E48C1ECF3B37CA5A795A517236769D /* MSWMockingPlaceMenuTableViewController.m in Sources */,
 				BF08846168CB7598479C15BAB27140D3 /* MSWMockLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

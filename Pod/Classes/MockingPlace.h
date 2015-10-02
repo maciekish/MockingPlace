@@ -8,9 +8,9 @@
 
 @import Foundation;
 @import CoreLocation;
-#import "MockingPlaceMenuTableViewController.h"
+#import "MSWMockingPlaceMenuTableViewController.h"
 
-@interface MockingPlace : NSObject <MockingPlaceMenuTableViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface MockingPlace : NSObject <MSWMockingPlaceMenuTableViewControllerDelegate, UIGestureRecognizerDelegate>
 
 /**
  *  The selected MockLocation to simulate

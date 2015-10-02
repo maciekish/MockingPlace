@@ -4,7 +4,7 @@
 #import "CLLocation+Bearing.h"
 #import "CLLocationManager+MockingPlaces.h"
 #import "MockingPlace.h"
-#import "MockingPlaceMenuTableViewController.h"
+#import "MSWMockingPlaceMenuTableViewController.h"
 #import "MSWMockLocation.h"
 
 FOUNDATION_EXPORT double MockingPlaceVersionNumber;
