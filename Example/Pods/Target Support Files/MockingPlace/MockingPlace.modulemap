@@ -1,6 +1,0 @@
-framework module MockingPlace {
-  umbrella header "MockingPlace-umbrella.h"
-
-  export *
-  module * { export * }
-}
