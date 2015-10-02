@@ -36,4 +36,9 @@
  */
 + (void)disable;
 
+/**
+ *  Presents the location simulation menu.
+ */
++ (void)showMenu;
+
 @end

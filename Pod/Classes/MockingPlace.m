@@ -53,7 +53,7 @@
 
 + (void)enable
 {
-    MockingPlace.sharedInstance.gestureRecognizer = [UILongPressGestureRecognizer.alloc initWithTarget:MockingPlace.sharedInstance action:@selector(showMenu:)];
+    MockingPlace.sharedInstance.gestureRecognizer = [UILongPressGestureRecognizer.alloc initWithTarget:MockingPlace.sharedInstance action:@selector(handleGestureRecognizer:)];
     MockingPlace.sharedInstance.gestureRecognizer.delegate = MockingPlace.sharedInstance;
     MockingPlace.sharedInstance.gestureRecognizer.numberOfTouchesRequired = 2;
     
@@ -72,21 +72,31 @@
     [MockingPlace.sharedInstance stopSimulation];
 }
 
-- (void)showMenu:(UILongPressGestureRecognizer *)recognizer
++ (void)showMenu
+{
+    [MockingPlace.sharedInstance showMenu];
+}
+
+- (void)showMenu
+{
+    if (!self.menuViewController) {
+        MSWMockingPlaceMenuTableViewController *menuViewController = [MSWMockingPlaceMenuTableViewController.alloc initWithStyle:UITableViewStylePlain andMockLocations:self.availableLocations];
+        menuViewController.delegate = self;
+        
+        UINavigationController *navigationController = [UINavigationController.alloc initWithRootViewController:menuViewController];
+        navigationController.navigationBar.barTintColor = UIColor.darkGrayColor;
+        navigationController.navigationBar.tintColor = UIColor.whiteColor;
+        navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: UIColor.whiteColor};
+        navigationController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:navigationController animated:YES completion:nil];
+        self.menuViewController = menuViewController;
+    }
+}
+
+- (void)handleGestureRecognizer:(UILongPressGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        if (!self.menuViewController) {
-            MSWMockingPlaceMenuTableViewController *menuViewController = [MSWMockingPlaceMenuTableViewController.alloc initWithStyle:UITableViewStylePlain andMockLocations:self.availableLocations];
-            menuViewController.delegate = self;
-            
-            UINavigationController *navigationController = [UINavigationController.alloc initWithRootViewController:menuViewController];
-            navigationController.navigationBar.barTintColor = UIColor.darkGrayColor;
-            navigationController.navigationBar.tintColor = UIColor.whiteColor;
-            navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: UIColor.whiteColor};
-            navigationController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-            [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:navigationController animated:YES completion:nil];
-            self.menuViewController = menuViewController;
-        }
+        [self showMenu];
     }
 }
 
