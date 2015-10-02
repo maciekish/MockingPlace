@@ -47,12 +47,12 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-    NSLog(@"CLLocationManager updated location to %@", locations.firstObject);
+    NSLog(@"CLLocationManager updated location %@", locations.firstObject);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
 {
-    NSLog(@"CLLocationManager updated heading to %@", newHeading);
+    NSLog(@"CLLocationManager updated heading %@", newHeading);
 }
 
 @end

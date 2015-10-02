@@ -10,7 +10,8 @@
 #import "CLLocationManager+MockingPlaces.h"
 #import "MockingPlace.h"
 
-NSString *const kMockingPlacesLocationChangedNotification = @"kMockingPlacesLocationChanged";
+NSString *const kMockingPlacesLocationChangedNotification = @"MockingPlacesLocationChanged";
+NSString *const kMockingPlacesStatusChangedNotification = @"MockingPlacesStatusChanged";
 
 @implementation CLLocationManager (MockingPlaces)
 
@@ -29,16 +30,27 @@ NSString *const kMockingPlacesLocationChangedNotification = @"kMockingPlacesLoca
     return kCLAuthorizationStatusAuthorizedAlways;
 }
 
--(void)mock_startUpdatingLocation;
+- (void)mock_startUpdatingLocation;
 {
+    // Refresh notification observers
     [NSNotificationCenter.defaultCenter removeObserver:self];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(locationUpdated:) name:kMockingPlacesLocationChangedNotification object:nil];
-
-    if ([self.delegate respondsToSelector:@selector(locationManager:didUpdateLocations:)] &&
-        self.location) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [self.delegate locationManager:self didUpdateLocations:@[self.location]];
-        });
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(restart) name:kMockingPlacesStatusChangedNotification object:nil];
+    
+    // Switch between simulated and real locations
+    if (MockingPlace.sharedInstance.mockLocation) {
+        // Disable Apple location updates in favor of the simulated ones.
+        [self mock_stopUpdatingLocation]; //Because the methods are swizzled, this actually calls the original Apple implementation of stopUpdatingLocation.
+        
+        if ([self.delegate respondsToSelector:@selector(locationManager:didUpdateLocations:)] &&
+            self.location) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [self.delegate locationManager:self didUpdateLocations:@[self.location]];
+            });
+        }
+    } else {
+        // Disable Apple location updates instead of the simulated ones.
+        [self mock_startUpdatingLocation]; //Because the methods are swizzled, this actually calls the original Apple implementation of startUpdatingLocation.
     }
 }
 
@@ -50,6 +62,14 @@ NSString *const kMockingPlacesLocationChangedNotification = @"kMockingPlacesLoca
 -(CLLocation *)mock_location;
 {
     return MockingPlace.sharedInstance.currentLocation;
+}
+
+- (void)restart
+{
+    [self stopUpdatingLocation];
+    [self stopUpdatingHeading];
+    [self startUpdatingLocation];
+    [self startUpdatingHeading];
 }
 
 // MockingPlace sends a notification with the new location each time the simulated location changes. All CLLocationmanagers pick it up here and propagate it to their delegates.

@@ -121,8 +121,7 @@
     _simulationStep = 0;
     
     if (_mockLocation) {
-        [self stopSimulation];
-        [self simulate];
+        [self startSimulation];
     } else {
         [self stopSimulation];
     }
@@ -156,10 +155,17 @@
     }
 }
 
+- (void)startSimulation
+{
+    [self stopSimulation];
+    [self simulate];
+}
+
 - (void)stopSimulation
 {
     self.currentLocation = nil;
     [self.simulationTimer invalidate];
+    [NSNotificationCenter.defaultCenter postNotificationName:kMockingPlacesStatusChangedNotification object:nil];
 }
 
 #pragma mark - UIGestureRecognizerDelegate

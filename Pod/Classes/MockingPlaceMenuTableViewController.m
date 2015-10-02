@@ -39,11 +39,9 @@
     [super viewDidLoad];
     
     self.title = @"MockingPlace";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem.alloc initWithTitle:@"Disable" style:UIBarButtonItemStylePlain target:self action:@selector(disable)];
+    self.navigationItem.leftBarButtonItem.enabled = MockingPlace.sharedInstance.mockLocation != nil;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem.alloc initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-    
-    // Provide a stop button for routes
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem.alloc initWithTitle:@"Stop" style:UIBarButtonItemStylePlain target:self action:@selector(stop)];
-    self.navigationItem.leftBarButtonItem.enabled = MockingPlace.sharedInstance.mockLocation.locations.count > 1;
 }
 
 - (void)done
@@ -51,7 +49,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)stop
+- (void)disable
 {
     if ([self.delegate respondsToSelector:@selector(placeMenuViewController:didSelectMockLocation:)]) {
         [self.delegate placeMenuViewController:self didSelectMockLocation:nil];

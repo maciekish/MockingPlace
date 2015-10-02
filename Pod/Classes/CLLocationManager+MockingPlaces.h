@@ -10,6 +10,7 @@
 @import CoreLocation;
 
 UIKIT_EXTERN NSString *const kMockingPlacesLocationChangedNotification;
+UIKIT_EXTERN NSString *const kMockingPlacesStatusChangedNotification;
 
 @interface CLLocationManager (MockingPlaces)
 
