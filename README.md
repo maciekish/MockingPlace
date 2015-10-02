@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/cocoapods/l/MockingPlace.svg?style=flat)](http://cocoapods.org/pods/MockingPlace)
 [![Platform](https://img.shields.io/cocoapods/p/MockingPlace.svg?style=flat)](http://cocoapods.org/pods/MockingPlace)
 
-MockingPlace plays back GeoJSON tracks and coordinates because Xcode does not do this properly.
+MockinPlace is a location simulator for iOS. It plays back GeoJSON tracks and coordinates because Xcode does not do this properly.
 
 * Supports both the simulator and real devices.
 * Generates speed and heading values from your coordinates.
