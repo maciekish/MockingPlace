@@ -8,11 +8,11 @@
 
 @import UIKit;
 
-@class MockingPlaceMenuTableViewController, MockLocation;
+@class MockingPlaceMenuTableViewController, MSWMockLocation;
 
 @protocol MockingPlaceMenuTableViewControllerDelegate <NSObject>
 
-- (void)placeMenuViewController:(MockingPlaceMenuTableViewController *)viewController didSelectMockLocation:(MockLocation *)mockLocation;
+- (void)placeMenuViewController:(MockingPlaceMenuTableViewController *)viewController didSelectMockLocation:(MSWMockLocation *)mockLocation;
 
 @end
 
@@ -20,6 +20,6 @@
 
 @property (nonatomic, weak) id<MockingPlaceMenuTableViewControllerDelegate> delegate;
 
-- (instancetype)initWithStyle:(UITableViewStyle)style andMockLocations:(NSArray<MockLocation *> *)mockLocations;
+- (instancetype)initWithStyle:(UITableViewStyle)style andMockLocations:(NSArray<MSWMockLocation *> *)mockLocations;
 
 @end

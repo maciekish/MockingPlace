@@ -1,14 +1,14 @@
 //
-//  MockLocation.m
+//  MSWMockLocation.m
 //  MockingPlace
 //
 //  Created by Maciej Swic on 01/10/15.
 //
 //
 
-#import "MockLocation.h"
+#import "MSWMockLocation.h"
 
-@implementation MockLocation
+@implementation MSWMockLocation
 
 @synthesize locations = _locations;
 
@@ -58,8 +58,8 @@
 
 - (NSComparisonResult)compareTitle:(id)otherObject
 {
-    if ([otherObject isKindOfClass:MockLocation.class]) {
-        MockLocation *otherLocation = (MockLocation *)otherObject;
+    if ([otherObject isKindOfClass:MSWMockLocation.class]) {
+        MSWMockLocation *otherLocation = (MSWMockLocation *)otherObject;
         
         return [self.title compare:otherLocation.title options:NSCaseInsensitiveSearch];
     } else {

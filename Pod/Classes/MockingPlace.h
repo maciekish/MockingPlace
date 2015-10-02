@@ -15,7 +15,7 @@
 /**
  *  The selected MockLocation to simulate
  */
-@property (nonatomic, strong) MockLocation *mockLocation;
+@property (nonatomic, strong) MSWMockLocation *mockLocation;
 
 /**
  *  The currently simulated location

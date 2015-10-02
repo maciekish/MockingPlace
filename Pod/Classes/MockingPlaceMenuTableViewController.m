@@ -10,19 +10,19 @@
 @import CoreLocation;
 
 #import "MockingPlace.h"
-#import "MockLocation.h"
+#import "MSWMockLocation.h"
 
 #define kMockingPlaceCellIdentifier @"MockingPlaceCell"
 
 @interface MockingPlaceMenuTableViewController ()
 
-@property (nonatomic, strong) NSArray<MockLocation *> *locations;
+@property (nonatomic, strong) NSArray<MSWMockLocation *> *locations;
 
 @end
 
 @implementation MockingPlaceMenuTableViewController
 
-- (instancetype)initWithStyle:(UITableViewStyle)style andMockLocations:(NSArray<MockLocation *> *)mockLocations
+- (instancetype)initWithStyle:(UITableViewStyle)style andMockLocations:(NSArray<MSWMockLocation *> *)mockLocations
 {
     self = [super initWithStyle:style];
     

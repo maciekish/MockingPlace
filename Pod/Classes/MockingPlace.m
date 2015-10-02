@@ -12,7 +12,7 @@
 
 #import "CLLocationManager+MockingPlaces.h"
 #import "CLLocation+Bearing.h"
-#import "MockLocation.h"
+#import "MSwMockLocation.h"
 
 @interface MockingPlace ()
 
@@ -87,24 +87,24 @@
 
 #pragma mark - MockPlaceMenu Delegate
 
-- (void)placeMenuViewController:(MockingPlaceMenuTableViewController *)viewController didSelectMockLocation:(MockLocation *)mockLocation
+- (void)placeMenuViewController:(MockingPlaceMenuTableViewController *)viewController didSelectMockLocation:(MSWMockLocation *)mockLocation
 {
     self.mockLocation = mockLocation;
 }
 
 #pragma mark - Private
 
-- (NSArray<MockLocation *> *)availableLocations
+- (NSArray<MSWMockLocation *> *)availableLocations
 {
     NSArray<NSString *> *filePaths = [NSBundle.mainBundle pathsForResourcesOfType:@"geojson" inDirectory:nil];
-    NSMutableArray<MockLocation *> *locations = NSMutableArray.new;
+    NSMutableArray<MSWMockLocation *> *locations = NSMutableArray.new;
     
     for (NSString *filePath in filePaths) {
         NSString *fileName = filePath.lastPathComponent.stringByDeletingPathExtension.capitalizedString;
         
         // Ignore coverage.geojson
         if (![fileName.lowercaseString isEqualToString:@"coverage"]) {
-            MockLocation *mockLocation = [MockLocation.alloc initWithTitle:fileName andPath:filePath];
+            MSWMockLocation *mockLocation = [MSWMockLocation.alloc initWithTitle:fileName andPath:filePath];
             [locations addObject:mockLocation];
         }
     }
@@ -114,7 +114,7 @@
     return locations.copy;
 }
 
-- (void)setMockLocation:(MockLocation *)mockLocation
+- (void)setMockLocation:(MSWMockLocation *)mockLocation
 {
     _mockLocation = mockLocation;
     _simulationStep = 0;

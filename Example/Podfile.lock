@@ -9,7 +9,7 @@ PODS:
   - FBSnapshotTestCase/SwiftSupport (2.0.4):
     - FBSnapshotTestCase/Core
   - JRSwizzle (1.0)
-  - MockingPlace (0.1.1):
+  - MockingPlace (0.1.4):
     - JRSwizzle (~> 1.0)
   - Specta (1.0.4)
 
@@ -29,7 +29,7 @@ SPEC CHECKSUMS:
   Expecta+Snapshots: 29b38dd695bc72a0ed2bea833937d78df41943ba
   FBSnapshotTestCase: d94cf34841c9e77390e29009e8e2713479d48753
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
-  MockingPlace: cf47ef6650beec8c99a4ad8cc25b420169ca9c0a
+  MockingPlace: 6de26327186667399d20af38b73f7e50560debeb
   Specta: 69bb134672aae190a1379ff91df07dad8dd1f869
 
-COCOAPODS: 0.39.0.beta.4
+COCOAPODS: 0.38.2

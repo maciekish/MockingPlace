@@ -1,5 +1,5 @@
 //
-//  MockLocation.h
+//  MSWMockLocation.h
 //  MockingPlace
 //
 //  Created by Maciej Swic on 01/10/15.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MockLocation : NSObject
+@interface MSWMockLocation : NSObject
 
 /**
  *  The title of the location or track.
