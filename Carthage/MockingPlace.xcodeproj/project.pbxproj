@@ -19,7 +19,7 @@
 		C19FF0761D8C29B0001FBA08 /* MSWMockingPlaceMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C19FF06A1D8C29B0001FBA08 /* MSWMockingPlaceMenuTableViewController.m */; };
 		C19FF0771D8C29B0001FBA08 /* MSWMockLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = C19FF06B1D8C29B0001FBA08 /* MSWMockLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C19FF0781D8C29B0001FBA08 /* MSWMockLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C19FF06C1D8C29B0001FBA08 /* MSWMockLocation.m */; };
-		C19FF07B1D8C2C94001FBA08 /* MockingPlace.h in Headers */ = {isa = PBXBuildFile; fileRef = C19FF07A1D8C2C94001FBA08 /* MockingPlace.h */; };
+		C19FF07B1D8C2C94001FBA08 /* MockingPlace.h in Headers */ = {isa = PBXBuildFile; fileRef = C19FF07A1D8C2C94001FBA08 /* MockingPlace.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
