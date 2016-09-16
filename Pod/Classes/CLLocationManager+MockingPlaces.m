@@ -8,7 +8,7 @@
 
 #import "CLHeading+Init.h"
 #import "CLLocationManager+MockingPlaces.h"
-#import "MockingPlace.h"
+#import "MSWMockingPlace.h"
 
 NSString *const kMockingPlacesLocationChangedNotification = @"MockingPlacesLocationChanged";
 NSString *const kMockingPlacesStatusChangedNotification = @"MockingPlacesStatusChanged";

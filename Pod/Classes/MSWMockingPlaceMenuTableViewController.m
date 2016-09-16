@@ -9,7 +9,7 @@
 #import "MSWMockingPlaceMenuTableViewController.h"
 @import CoreLocation;
 
-#import "MockingPlace.h"
+#import "MSWMockingPlace.h"
 #import "MSWMockLocation.h"
 
 #define kMockingPlaceCellIdentifier @"MockingPlaceCell"

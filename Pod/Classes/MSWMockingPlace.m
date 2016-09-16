@@ -1,14 +1,14 @@
 //
-//  MockingPlace.m
+//  MSWMockingPlace.m
 //  MockingPlace
 //
 //  Created by Maciej Swic on 01/10/15.
 //
 //
 
-#import "MockingPlace.h"
-#import <JRSwizzle/JRSwizzle.h>
+#import "MSWMockingPlace.h"
 @import CoreLocation;
+@import ObjectiveC;
 
 #import "CLLocationManager+MockingPlaces.h"
 #import "CLLocation+Bearing.h"
@@ -30,13 +30,49 @@
 
 + (void)load
 {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+    });
     // Replace the necessary methods.
-    [CLLocationManager jr_swizzleClassMethod:@selector(locationServicesEnabled) withClassMethod:@selector(mock_locationServicesEnabled) error:nil];
-    [CLLocationManager jr_swizzleClassMethod:@selector(headingAvailable) withClassMethod:@selector(mock_headingAvailable) error:nil];
-    [CLLocationManager jr_swizzleMethod:@selector(locationServicesEnabled) withMethod:@selector(mock_locationServicesEnabled) error:nil];
-    [CLLocationManager jr_swizzleMethod:@selector(startUpdatingLocation) withMethod:@selector(mock_startUpdatingLocation) error:nil];
-    [CLLocationManager jr_swizzleMethod:@selector(stopUpdatingLocation) withMethod:@selector(mock_stopUpdatingLocation) error:nil];
-    [CLLocationManager jr_swizzleMethod:@selector(location) withMethod:@selector(mock_location) error:nil];
+    [self swizzleClassMethod:@selector(locationServicesEnabled) to:@selector(mock_locationServicesEnabled)];
+    [self swizzleClassMethod:@selector(headingAvailable) to:@selector(mock_headingAvailable)];
+    [self swizzleMethod:@selector(locationServicesEnabled) to:@selector(mock_locationServicesEnabled)];
+    [self swizzleMethod:@selector(startUpdatingLocation) to:@selector(mock_startUpdatingLocation)];
+    [self swizzleMethod:@selector(stopUpdatingLocation) to:@selector(mock_stopUpdatingLocation)];
+    [self swizzleMethod:@selector(location) to:@selector(mock_location)];
+}
+
++ (void)swizzleMethod:(SEL)originalSelector to:(SEL)swizzledSelector
+{
+    Class class = self.class;
+    
+    Method originalMethod = class_getInstanceMethod(class, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+    
+    BOOL didAddMethod = class_addMethod(class, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
+    
+    if (didAddMethod) {
+        class_replaceMethod(class, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+}
+
++ (void)swizzleClassMethod:(SEL)originalSelector to:(SEL)swizzledSelector
+{
+    Class class = object_getClass((id)self);
+    
+    Method originalMethod = class_getClassMethod(class, originalSelector);
+    Method swizzledMethod = class_getClassMethod(class, swizzledSelector);
+    
+    BOOL didAddMethod = class_addMethod(class, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
+    
+    if (didAddMethod) {
+        class_replaceMethod(class, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
 }
 
 + (instancetype)sharedInstance

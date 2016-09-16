@@ -6,7 +6,7 @@
 //
 //
 
-@import Foundation;
+@import UIKit;
 @import CoreLocation;
 
 NS_ASSUME_NONNULL_BEGIN

@@ -9,8 +9,8 @@
 @import Foundation;
 @import CoreLocation;
 
-UIKIT_EXTERN NSString *const kMockingPlacesLocationChangedNotification;
-UIKIT_EXTERN NSString *const kMockingPlacesStatusChangedNotification;
+extern NSString *const kMockingPlacesLocationChangedNotification;
+extern NSString *const kMockingPlacesStatusChangedNotification;
 
 @interface CLLocationManager (MockingPlaces)
 

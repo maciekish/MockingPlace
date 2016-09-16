@@ -1,5 +1,5 @@
 //
-//  MockingPlace.h
+//  MSWMockingPlace.h
 //  MockingPlace
 //
 //  Created by Maciej Swic on 01/10/15.
